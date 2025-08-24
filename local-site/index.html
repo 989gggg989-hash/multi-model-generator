@@ -1,0 +1,23 @@
+<!-- index.html -->
+<input id="prompt" placeholder="Введите описание" />
+<button onclick="generate('flux')">Generate Flux</button>
+<button onclick="generate('sdxl')">Generate SDXL</button>
+<button onclick="generate('anim')">Generate Animation</button>
+<div id="output"></div>
+
+<script>
+  const API_URL = "https://твой_логин-multi-model-api.hf.space";
+
+  async function generate(model) {
+    const prompt = document.getElementById("prompt").value;
+    const res = await fetch(`${API_URL}/generate/${model}?prompt=${prompt}`);
+    const data = await res.json();
+
+    const output = document.getElementById("output");
+    if (data.type === "photo") {
+      output.innerHTML = `<img src="data:image/png;base64,${data.data}" width="512" />`;
+    } else if (data.type === "video") {
+      output.innerHTML = `<img src="data:image/gif;base64,${data.data}" width="512" />`;
+    }
+  }
+</script>

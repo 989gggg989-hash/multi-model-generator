@@ -1,0 +1,6 @@
+fastapi
+diffusers
+transformers
+accelerate
+torch
+git+https://github.com/guoyww/animatediff.git
