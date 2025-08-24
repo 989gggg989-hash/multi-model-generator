@@ -1,12 +1,17 @@
 
-FROM python:3.10
+FROM python:3.10-slim
 
 WORKDIR /app
 
+# Установка зависимостей
 COPY requirements.txt .
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
+# Копирование приложения
 COPY app.py .
+
+# Создание директории для моделей
+RUN mkdir -p /root/.cache/huggingface/hub
 
 EXPOSE 7860
 
